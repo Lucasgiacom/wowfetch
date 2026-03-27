@@ -7,24 +7,59 @@
     <script>const whTooltips = {colorLinks: true, iconizeLinks: true, renameLinks: false, iconSize:"medium"};</script>
     <script src="https://wow.zamimg.com/js/tooltips.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <title>Teste WoW</title>
+    <title>WoW Profile Viewer</title>
 </head>
 <body class="backgroundimg">
-<div class="card">
+
+    <div class="card">
         <h1>WoW Fetch</h1>
-        <div id="character-info">
-            <p class="loading">Enter Details</p>
+        
+        <div id="searchtools">
+            <input type="text" id="name" placeholder="Character Name">
+            <input type="text" id="realm" placeholder="Realm (e.g. Illidan)">
+            <button id="search-button" onclick="loadFullProfile()" disabled>Search Character</button>
         </div>
-    <div id=searchtools>
-    <input type="text" id="realm" placeholder="Realm (e.g. Illidan)"><br><br>
-    <input type="text" id="name" placeholder="Character Name"><br><br>
-    <button onclick="loadFullProfile()">Search Character</button>
-    </div> 
-        
-        
- </div>
-    <div id="display"></div>
+
+        <nav id="profile-nav" style="display: none;">
+            <button class="nav-btn active" onclick="showTab('overview')">Overview</button>
+            <button class="nav-btn" onclick="showTab('mounts')">Mounts</button>
+            <button class="nav-btn back-btn" onclick="location.reload()">New Search</button>
+        </nav>
+
+        <div id="character-info">
+            
+            <div id="overview-tab" class="tab-content" style="display: none;">
+                <div class="main">
+                    <h2 id="char-name"></h2>
+                    <div class="stats-grid">
+                        <p><strong>Level:</strong> <span id="char-level"></span></p>
+                        <p><strong>Class:</strong> <span id="char-class"></span></p>
+                        <p><strong>Race:</strong> <span id="char-race"></span></p>
+                        <p><strong>Item Level:</strong> <span id="char-ilvl"></span></p>
+                        <p><strong>Achievement Points:</strong> <span id="achievement_points"></span></p>
+                        <p><strong>Total Mounts:</strong> <span id="total-mounts"></span></p>
+                    </div>
+                </div>
+                <div class="imageframe">
+                    <img id="char-img" src="" class="characterimg">
+                </div>
+            </div>
+
+            <div id="mounts-tab" class="tab-content" style="display: none;">
+                <div class="mountsec">
+                    <div class="mount-header">
+                        <h2 style="color: white;">Mounts Collection</h2>
+                        <h3 style="color: white;">Total Collected: <span id="total-mounts-tab">0</span></h3>
+                        <input type="text" id="mountSearch" placeholder="Filter mounts..." onkeyup="filterMounts()">
+                    </div>
+                    <ul id="mount-grid-list" class="mount-grid">
+                        </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <script src="script.js"></script>
-    
 </body>
 </html>
