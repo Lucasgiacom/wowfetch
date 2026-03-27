@@ -86,12 +86,15 @@ async function loadFullProfile() {
                     </div>
         `;
 
-       // Replace your current refreshLinks block with this:
-if (typeof $WowheadPower !== 'undefined') {
-    $WowheadPower.refreshLinks();
-} else if (typeof WH !== 'undefined' && WH.Tooltips) {
-    WH.Tooltips.refreshLinks();
-}
+       const refreshWowhead = () => {
+            if (window.$WowheadPower) {
+                window.$WowheadPower.refreshLinks();
+            }
+        };
+refreshWowhead();
+        setTimeout(refreshWowhead, 200);
+        setTimeout(refreshWowhead, 1000);
+
 
     } catch (err) {
         console.error(err);

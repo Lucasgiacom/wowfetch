@@ -129,20 +129,19 @@ body.backgroundimg {
 }
 
 .mountlink .wh-icon, 
-.mountlink ins, 
-.mountlink span[style*="background-image"] {
+.mountlink ins {
     display: inline-block;
-    visibility: visible;
     width: 32px;
     height: 32px;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 12px;
-    border: 1px solid #444;
+    margin-right: 10px;
+    vertical-align: middle;
+    border: 1px solid #333;
     border-radius: 4px;
     flex-shrink: 0;
 }
+
 
 .mount-grid::-webkit-scrollbar {
     width: 8px;
