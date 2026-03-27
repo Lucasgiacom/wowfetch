@@ -5,7 +5,7 @@ html, body {
 }
 
 body.backgroundimg {
-    background-image: url(../Assets/background123.webp);
+    background-image: url("../Assets/background123.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
