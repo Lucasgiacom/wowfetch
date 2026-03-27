@@ -57,7 +57,7 @@ async function loadFullProfile() {
                 class="mountlink" 
                 rel="nofollow"
                 data-wowhead="mount=${mountId}&iconize=true">
-                ${mountName}
+                <ins class="wh-icon"></ins> <span>${mountName}</span>
                 </a>
             </li>`;
     })
