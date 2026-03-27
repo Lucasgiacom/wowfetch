@@ -56,7 +56,7 @@ async function loadFullProfile() {
                 target="_blank"
                 class="mountlink" 
                 rel="nofollow"
-                data-wowhead="mount=${mountId}&iconsize=true">
+                data-wowhead="mount=${mountId}&iconize=true">
                 ${mountName}
                 </a>
             </li>`;
@@ -86,15 +86,12 @@ async function loadFullProfile() {
                     </div>
         `;
 
-        if (window.$WowheadPower){
-            window.$WowheadPower.refreshLinks();
-        }
-
-        setTimeout(() => {
-            if(window.$WowheadPower){
-                window.$WowheadPower.refreshLinks();
-            }
-        }, 200);
+       // Replace your current refreshLinks block with this:
+if (typeof $WowheadPower !== 'undefined') {
+    $WowheadPower.refreshLinks();
+} else if (typeof WH !== 'undefined' && WH.Tooltips) {
+    WH.Tooltips.refreshLinks();
+}
 
     } catch (err) {
         console.error(err);
