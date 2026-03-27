@@ -1,3 +1,7 @@
+let totalMountsInGame = 0;
+let mountLookup = {};
+let fullMountsData = []; 
+
 function showTab(tabName) {
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.style.display = 'none';
@@ -23,22 +27,26 @@ function filterMounts() {
     });
 }
 
-let mountLookup = {};
-
 fetch('./Data/mounts.json')
     .then(res => res.json())
     .then(data => {
+        fullMountsData = data; 
+        let count = 0;
         data.forEach(cat => {
             if (cat.subcats) {
                 cat.subcats.forEach(sub => {
-                    sub.items.forEach(m => {
-                        if (m.ID) mountLookup[m.ID] = m.icon;
-                        if (m.spellid) mountLookup[m.spellid] = m.icon;
-                        if (m.itemId) mountLookup[m.itemId] = m.icon;
-                    });
+                    if (sub.items) {
+                        sub.items.forEach(m => {
+                            count++;
+                            if (m.ID) mountLookup[m.ID] = m.icon;
+                            if (m.spellid) mountLookup[m.spellid] = m.icon;
+                            if (m.itemId) mountLookup[m.itemId] = m.icon;
+                        });
+                    }
                 });
             }
         });
+        totalMountsInGame = count;
         const btn = document.getElementById("search-button");
         if (btn) btn.disabled = false;
     })
@@ -66,6 +74,7 @@ async function loadFullProfile() {
         const stats = await statsRes.json();
         const media = await mediaRes.json();
         const mountsData = await mountsRes.json();
+        const mountCount = mountsData.mounts ? mountsData.mounts.length : 0;
 
         document.getElementById("searchtools").style.display = "none";
         document.getElementById("profile-nav").style.display = "flex";
@@ -76,25 +85,38 @@ async function loadFullProfile() {
         document.getElementById("char-race").textContent = stats.race.name;
         document.getElementById("char-ilvl").textContent = stats.equipped_item_level || stats.average_item_level;
         document.getElementById("achievement_points").textContent = stats.achievement_points || 0;
-        document.getElementById("total-mounts").textContent = mountsData.mounts.length;
-        document.getElementById("total-mounts-tab").textContent = mountsData.mounts.length;
         
+        document.querySelectorAll(".game-total-mounts").forEach(el => el.textContent = totalMountsInGame);
+        document.querySelectorAll(".total-mountsown").forEach(el => el.textContent = mountCount);
+
         const mainAsset = media?.assets?.find(a => a.key === "main-raw");
         document.getElementById("char-img").src = mainAsset?.value ?? "";
 
+        // Challenge Logic: Check ownership against the full database
+        const ownedIds = new Set(mountsData.mounts.map(m => m.mount.id));
         const mountGrid = document.getElementById("mount-grid-list");
-        mountGrid.innerHTML = mountsData.mounts.map(m => {
-            const mId = m.mount.id;
-            const icon = mountLookup[mId] || "inv_misc_questionmark";
-            return `
-                <li class="mountitem">
-                    <a href="https://www.wowhead.com/mount/${mId}" target="_blank" class="mountlink">
-                       <img src="https://render.worldofwarcraft.com/us/icons/56/${icon}.jpg" class="wh-icon">
-                       <span>${m.mount.name}</span>
-                    </a>
-                </li>`;
-        }).join('');
+        
+        let allMountsHTML = "";
+        fullMountsData.forEach(cat => {
+            cat.subcats.forEach(sub => {
+                sub.items.forEach(m => {
+                    const mId = m.ID || m.spellid || m.itemId;
+                    const isOwned = ownedIds.has(mId);
+                    const icon = m.icon || "inv_misc_questionmark";
+                    
+                    allMountsHTML += `
+                        <li class="mountitem ${isOwned ? 'owned' : 'not-owned'}">
+                            <a href="https://www.wowhead.com/mount/${mId}" target="_blank" class="mountlink">
+                               <img src="https://render.worldofwarcraft.com/us/icons/56/${icon}.jpg" 
+                                    class="wh-icon ${isOwned ? '' : 'greyscale'}">
+                               <span>${m.name}</span>
+                            </a>
+                        </li>`;
+                });
+            });
+        });
 
+        mountGrid.innerHTML = allMountsHTML;
         showTab('overview');
 
     } catch (err) {
