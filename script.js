@@ -56,7 +56,7 @@ async function loadFullProfile() {
                 target="_blank"
                 class="mountlink" 
                 rel="nofollow"
-                data-wowhead="mount=${mountId}">
+                data-wowhead="mount=${mountId}&iconsize=true">
                 ${mountName}
                 </a>
             </li>`;
