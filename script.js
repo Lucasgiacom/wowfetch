@@ -14,7 +14,7 @@ function filterMounts() {
 
 let mountLookup = {};
 
-fetch('/Data/mounts.json')
+fetch('../Data/mounts.json')
     .then(res => res.json())
     .then(data => {
         data.forEach(cat => {
