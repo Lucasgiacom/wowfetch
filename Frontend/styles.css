@@ -1,0 +1,163 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.backgroundimg {
+    background-image: url(../Assets/background123.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    padding-top: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.card {
+    text-align: center;
+    margin: 30px auto;
+    width: min(900px, 95%);
+}
+
+.card h1 {
+    color: white;
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: white;
+    font-size: 22px;
+}
+
+.main {
+    border: 2px solid #ffd100;
+    width: 320px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 8px;
+}
+
+.main h2 {
+    margin-top: 0;
+    color: #ffd100;
+}
+
+.main p {
+    font-size: 14px;
+    margin: 8px 0;
+    text-align: left;
+}
+
+.imageframe {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.characterimg {
+    position: absolute;
+    top: 37%;
+    width: 105%;
+    height: auto;
+    transform: translateY(-50%);
+    object-fit: contain;
+}
+
+.mountsec {
+    margin-top: 30px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 12px;
+    width: min(1000px, 95%);
+    margin-bottom: 50px;
+}
+
+.mount-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.mountitem, .mount-grid li {
+    background: rgba(0, 0, 0, 0.616);
+    border-left: 4px solid #ffd100;
+    border-radius: 4px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    transition: background 0.2s;
+}
+
+.mountitem:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.mountlink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    transition: background 0.2s;
+}
+
+.mountlink:hover {
+    transform: translateX(3px);
+}
+
+.mountlink img.wh-icon { 
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+
+.mount-grid::-webkit-scrollbar {
+    width: 8px;
+}
+.mount-grid::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.3);
+}
+.mount-grid::-webkit-scrollbar-thumb {
+    background: #ffd100;
+    border-radius: 10px;
+}
+
+.mount-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.mountsearch {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}   
+
+
