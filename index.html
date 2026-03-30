@@ -27,39 +27,62 @@
         </nav>
 
         <div id="character-info">
-            
-            <div id="overview-tab" class="tab-content" style="display: none;">
-                <div class="main">
-                    <h2 id="char-name"></h2>
-                    <div class="stats-grid">
-                        <p><strong>Level:</strong> <span id="char-level"></span></p>
-                        <p><strong>Class:</strong> <span id="char-class"></span></p>
-                        <p><strong>Race:</strong> <span id="char-race"></span></p>
-                        <p><strong>Item Level:</strong> <span id="char-ilvl"></span></p>
-                        <p><strong>Achievement Points:</strong> <span id="achievement_points"></span></p>
-                        <p><strong>Total Mounts:</strong> <span class="total-mountsown">0</span>
-                    </div>
-                </div>
-                <div class="imageframe">
-                    <img id="char-img" src="" class="characterimg">
-                </div>
+    <div id="overview-tab" class="tab-content" style="display: none;">
+        <div class="main">
+            <h2 id="char-name"></h2>
+            <div class="stats-grid">
+                <p><strong>Level:</strong> <span id="char-level"></span></p>
+                <p><strong>Class:</strong> <span id="char-class"></span></p>
+                <p><strong>Race:</strong> <span id="char-race"></span></p>
+                <p><strong>Item Level:</strong> <span id="char-ilvl"></span></p>
+                <p><strong>Achievement Points:</strong> <span id="achievement_points"></span></p>
+                <p><strong>Total Mounts:</strong> <span class="total-mountsown">0</span></p>
             </div>
-
-            <div id="mounts-tab" class="tab-content" style="display: none;">
-                <div class="mountsec">
-                    <div class="mount-header">
-                        <h2 style="color: white;">Mounts Collection</h2>
-                        <h3 style="color: white;">Total Collected: <span class="total-mountsown">0</span>/<span class="game-total-mounts">0</span></p></h3>
-                        <input type="text" id="mountSearch" placeholder="Filter mounts..." onkeyup="filterMounts()">
-                    </div>
-                    <ul id="mount-grid-list" class="mount-grid">
-                        </ul>
-                </div>
-            </div>
-
         </div>
-    </div>
 
+        <div class="character-display-container">
+            <div class="equipment-column" id="gear-left">
+                <div class="gear-slot" id="slot-head"></div>
+                <div class="gear-slot" id="slot-neck"></div>
+                <div class="gear-slot" id="slot-shoulders"></div>
+                <div class="gear-slot" id="slot-back"></div>
+                <div class="gear-slot" id="slot-chest"></div>
+                <div class="gear-slot" id="slot-shirt"></div>
+                <div class="gear-slot" id="slot-tabard"></div>
+                <div class="gear-slot" id="slot-wrist"></div>
+            </div>
+
+            <div class="imageframe">
+                <img id="char-img" src="" class="characterimg">
+                <div class="weapon-row">
+                    <div id="slot-mainhand" class="gear-slot weapon-slot"></div>
+                    <div id="slot-offhand" class="gear-slot weapon-slot"></div>
+                </div>
+            </div>
+
+            <div class="equipment-column" id="gear-right">
+                <div class="gear-slot" id="slot-hands"></div>
+                <div class="gear-slot" id="slot-waist"></div>
+                <div class="gear-slot" id="slot-legs"></div>
+                <div class="gear-slot" id="slot-feet"></div>
+                <div class="gear-slot" id="slot-finger1"></div>
+                <div class="gear-slot" id="slot-finger2"></div>
+                <div class="gear-slot" id="slot-trinket1"></div>
+                <div class="gear-slot" id="slot-trinket2"></div>
+            </div>
+        </div>
+    </div> <div id="mounts-tab" class="tab-content" style="display: none;">
+        <div class="mountsec">
+            <div class="mount-header">
+                <h2 style="color: white;">Mounts Collection</h2>
+                <h3 style="color: white;">Total Collected: <span class="total-mountsown">0</span> / <span class="game-total-mounts">0</span></h3>
+                <input type="text" id="mountSearch" placeholder="Filter mounts..." onkeyup="filterMounts()">
+            </div>
+            <ul id="mount-grid-list" class="mount-grid"></ul>
+        </div>
+    </div> </div>
+
+</div>
     <script src="script.js"></script>
 </body>
 </html>

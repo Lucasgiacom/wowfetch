@@ -69,7 +69,6 @@ body.backgroundimg {
     margin-left: auto;
 }
 
-
 .main {
     border: 2px solid #ffd100;
     width: 100%;
@@ -107,21 +106,146 @@ body.backgroundimg {
     color: #ffd100;
 }
 
-.imageframe {
+
+.character-display-container {
+    display: grid;
+    grid-template-columns: 67px 1fr 68px;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
     width: 100%;
-    height: 600px;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
+}
+
+
+.equipment-column {
     display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 2;
+}
+
+.gear-slot {
+    width: 67px;
+    height: 68px;
+    border: 1px solid rgba(255, 209, 0, 0.25);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
     justify-content: center;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+    transition: border-color 0.2s;
+    flex-shrink: 0;
+}
+
+.gear-slot:hover {
+    border-color: rgba(255, 209, 0, 0.6);
+}
+
+.weapon-slot {
+    width: 67px;
+    height: 68px;
+    border-color: rgba(255, 209, 0, 0.45);
+    margin-top: 4px; /* Small visual gap to separate weapons from armor */
+}
+
+
+
+.item-link {
+    display: block;
+    line-height: 0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.item-link.border-poor        { box-shadow: 0 0 0 2px #9d9d9d; }
+.item-link.border-common      { box-shadow: 0 0 0 2px #ffffff; }
+.item-link.border-uncommon    { box-shadow: 0 0 0 2px #1eff00; }
+.item-link.border-rare        { box-shadow: 0 0 0 2px #0070dd; }
+.item-link.border-epic        { box-shadow: 0 0 0 2px #a335ee; }
+.item-link.border-legendary   { box-shadow: 0 0 0 2px #ff8000; }
+.item-link.border-artifact    { box-shadow: 0 0 0 2px #e6cc80; }
+.item-link.border-heirloom    { box-shadow: 0 0 0 2px #00ccff; }
+
+
+.imageframe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(9 * 67px + 8 * 5px + 4px);
+    position: relative;
+    overflow: visible;
+    z-index: 1;
 }
 
 .characterimg {
-    max-width: 100%;
+ 
+    width: clamp(320px, 50vw, 680px);
     height: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
-    transform: translateY(-28%);
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.9));
+    transform: translateY(-8%);
+    pointer-events: none;
+}
+
+
+
+@media (max-width: 700px) {
+    .character-display-container {
+        grid-template-columns: 44px 1fr 44px;
+        gap: 5px;
+    }
+
+    .gear-slot {
+        width: 40px;
+        height: 40px;
+    }
+
+    .gear-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* 9 slots x 40px + 8 gaps x 4px + 4px weapon margin */
+    .imageframe {
+        height: calc(9 * 40px + 8 * 4px + 4px);
+    }
+
+    .characterimg {
+        width: clamp(200px, 45vw, 480px);
+    }
+}
+
+
+@media (max-width: 480px) {
+    .character-display-container {
+        grid-template-columns: 40px 1fr 40px;
+        gap: 4px;
+    }
+
+    .gear-slot {
+        width: 36px;
+        height: 36px;
+    }
+
+    .gear-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .characterimg {
+        width: clamp(180px, 42vw, 320px);
+    }
+
+    
+    .imageframe {
+        height: calc(9 * 36px + 8 * 4px + 4px);
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 
@@ -137,11 +261,10 @@ body.backgroundimg {
 .mount-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     margin-bottom: 20px;
     flex-wrap: wrap;
     gap: 15px;
-    align-items: baseline;
 }
 
 #mountSearch {
@@ -160,7 +283,6 @@ body.backgroundimg {
 
 .mount-grid {
     display: grid;
-    /* Responsive grid: fits as many as possible (min 220px wide) */
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 10px;
     list-style: none;
@@ -219,7 +341,7 @@ body.backgroundimg {
     font-size: 14px;
 }
 
-.mountlink img.wh-icon { 
+.mountlink img.wh-icon {
     width: 36px;
     height: 36px;
     margin-right: 12px;
@@ -228,17 +350,9 @@ body.backgroundimg {
     flex-shrink: 0;
 }
 
-
-.mount-grid::-webkit-scrollbar {
-    width: 8px;
-}
-.mount-grid::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.3);
-}
-.mount-grid::-webkit-scrollbar-thumb {
-    background: #ffd100;
-    border-radius: 10px;
-}
+.mount-grid::-webkit-scrollbar { width: 8px; }
+.mount-grid::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+.mount-grid::-webkit-scrollbar-thumb { background: #ffd100; border-radius: 10px; }
 
 
 
@@ -273,4 +387,11 @@ body.backgroundimg {
 #searchtools button:disabled {
     background: #555;
     cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+    #searchtools input {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
